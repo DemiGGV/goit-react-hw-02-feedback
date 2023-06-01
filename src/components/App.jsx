@@ -14,8 +14,6 @@ export class App extends Component {
   };
 
   incrementField = type => {
-    console.log(this);
-    console.log(type);
     this.setState(
       pState => {
         return {
@@ -33,7 +31,6 @@ export class App extends Component {
           total,
           positivePercentage,
         });
-        console.log(this.state);
       }
     );
   };
@@ -43,7 +40,6 @@ export class App extends Component {
   };
 
   countPositiveFeedbackPercentage = (total, good) => {
-    console.log(total, good);
     return (good / total).toFixed(2) * 100;
   };
 
