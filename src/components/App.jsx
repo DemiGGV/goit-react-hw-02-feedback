@@ -13,33 +13,20 @@ export class App extends Component {
     bad: 0,
   };
 
-  incrementField = type => {
-    this.setState(
-      pState => {
-        return {
-          [type]: pState[type] + 1,
-        };
-      },
-      () => {
-        const total = this.countTotalFeedback(this.state);
-        const positivePercentage = this.countPositiveFeedbackPercentage(
-          total,
-          this.state.good
-        );
-
-        this.setState({
-          total,
-          positivePercentage,
-        });
-      }
-    );
+  incrementField = event => {
+    const target = event.target.name;
+    this.setState(pState => {
+      return {
+        [target]: pState[target] + 1,
+      };
+    });
   };
 
   countTotalFeedback = state => {
-    return state.good + state.neutral + state.bad;
+    return Object.values(state).reduce((total, item) => total + item, 0);
   };
 
-  countPositiveFeedbackPercentage = (total, good) => {
+  countPositiveFeedbackPercentage = (total, { good }) => {
     return (good / total).toFixed(2) * 100;
   };
 
@@ -49,17 +36,21 @@ export class App extends Component {
         <GlobalStyle />
         <Section title="Please leave feedback">
           <FeedbackOptions
+            options={this.state}
             incrementField={this.incrementField}
-          ></FeedbackOptions>
+          />
         </Section>
         <Section title="Statistics">
-          {this.state.total ? (
+          {this.countTotalFeedback(this.state) ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
               bad={this.state.bad}
-              total={this.state.total}
-              positivePercentage={this.state.positivePercentage}
+              total={this.countTotalFeedback(this.state)}
+              positivePercentage={this.countPositiveFeedbackPercentage(
+                this.countTotalFeedback(this.state),
+                this.state
+              )}
             ></Statistics>
           ) : (
             <Notification message="There is no feedback"></Notification>

@@ -1,17 +1,18 @@
-import { ContainerCSS } from '../MainContainer';
+import { ContainerCSS, Button } from '../MainContainer';
 
-export function FeedbackOptions({ incrementField }) {
+export function FeedbackOptions({ options, incrementField }) {
   return (
     <ContainerCSS>
-      <button type="button" onClick={() => incrementField('good')}>
-        Good
-      </button>
-      <button type="button" onClick={() => incrementField('neutral')}>
-        Neutral
-      </button>
-      <button type="button" onClick={() => incrementField('bad')}>
-        Bad
-      </button>
+      {Object.keys(options).map((option, index) => (
+        <Button
+          key={index}
+          type="button"
+          name={option}
+          onClick={event => incrementField(event)}
+        >
+          {option}
+        </Button>
+      ))}
     </ContainerCSS>
   );
 }
