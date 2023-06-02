@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Title } from '../MainContainer';
 
 export function Section({ title, children }) {
@@ -8,3 +9,8 @@ export function Section({ title, children }) {
     </div>
   );
 }
+
+Section.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.object,
+};

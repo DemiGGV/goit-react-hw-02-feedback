@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { ContainerCSS, Button } from '../MainContainer';
 
 export function FeedbackOptions({ options, incrementField }) {
@@ -16,3 +17,12 @@ export function FeedbackOptions({ options, incrementField }) {
     </ContainerCSS>
   );
 }
+
+FeedbackOptions.propTypes = {
+  options: PropTypes.exact({
+    good: PropTypes.number.isRequired,
+    neutral: PropTypes.number.isRequired,
+    bad: PropTypes.number.isRequired,
+  }),
+  incrementField: PropTypes.func.isRequired,
+};
