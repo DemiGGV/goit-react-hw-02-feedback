@@ -8,8 +8,7 @@ export function FeedbackOptions({ options, incrementField }) {
         <Button
           key={index}
           type="button"
-          name={option}
-          onClick={event => incrementField(event)}
+          onClick={() => incrementField(option)}
         >
           {option}
         </Button>

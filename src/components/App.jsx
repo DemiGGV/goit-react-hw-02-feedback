@@ -13,11 +13,10 @@ export class App extends Component {
     bad: 0,
   };
 
-  incrementField = event => {
-    const target = event.target.name;
+  incrementField = option => {
     this.setState(pState => {
       return {
-        [target]: pState[target] + 1,
+        [option]: pState[option] + 1,
       };
     });
   };
@@ -27,7 +26,7 @@ export class App extends Component {
   };
 
   countPositiveFeedbackPercentage = (total, { good }) => {
-    return (good / total).toFixed(2) * 100;
+    return Math.round((good / total) * 100);
   };
 
   render() {
